@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
       <script type="text/javascript" src="js/bootstrap.js"></script>
-      <!-- <script type="text/javascript">
+      <script type="text/javascript">
            function test() {
-               document.getElementById('showc').style.display='block';
+               document.getElementById('menu').style.display='block';
            }
            function test1() {
-               document.getElementById('showc').style.display='none';
+               document.getElementById('menu').style.display='none';
            }
-       </script>-->
+       </script>
   </head>
   <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,10 +33,10 @@
                   <li class="active"><a href="#">首页</a></li>
                   <li class="#about"><a href="#">我们是谁</a></li>
                   <li class="#contact"><a href="#">联系我们</a></li>
-                  <li class="dropdown">
+                  <li class="dropdown" onmouseover="test()" onmouseleave="test1()">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
                       aria-haspopup="true">专栏<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
+                      <ul class="dropdown-menu" id="menu">
                           <li><a href="#">百态</a></li>
                           <li><a href="#">校园</a></li>
                           <li><a href="#">闲笔</a></li>
@@ -50,22 +50,8 @@
           </div>
       </div>
   </nav>
-  <!--<div class="container">
-      <nav class="navbar navbar-default" role="navigation">
-          <ul class="nav navbar-nav" onmouseenter="test()" onmouseleave="test1()">
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-                      编程语言
-                      <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu" style="display: none;" id="showc">
-                      <li><a>ASP</a></li>
-                      <li><a>JSP</a></li>
-                      <li><a>PHP</a></li>
-                  </ul>
-              </li>
-          </ul>
-      </nav>
-  </div>-->
+  <div class="container">
+
+  </div>
   </body>
 </html>
