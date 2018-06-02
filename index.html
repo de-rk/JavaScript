@@ -5,15 +5,23 @@
     <title>视频网站</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-      <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
       <script type="text/javascript">
+        // 显示菜单
            function test() {
                document.getElementById('menu').style.display='block';
            }
+           // 不显示菜单
            function test1() {
                document.getElementById('menu').style.display='none';
            }
        </script>
+       <style>
+         body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+       </style>
   </head>
   <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -26,7 +34,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a href="#" class="navbar-brand">京师学人</a>
+              <a href="#" class="navbar-brand">校园笔记</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -50,8 +58,15 @@
           </div>
       </div>
   </nav>
+  <div class="jumbotron">
   <div class="container">
-
+   <code>这是一个模仿的bootstarp中的网页模板</code>
+   <h1>记录</h1>
+   <p>笔记的内容来源于学习和生活，主要记录一些小常识，和一些小技巧。解决学习方面的问题。</p>
+   <p><a href="#" class="btn btn-success" role="button">知道更多</a></p>  
   </div>
+  </div>
+  <div class="col-md-3" style="table-layout:fixed;word-wrap:break-word;"  >
+   </div>
   </body>
 </html>
