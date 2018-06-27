@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="content">
+    <div class="cont">
+        <div class="left">
+            <div class="logo">
+                <span class="title">小微</span><br/>
+                <span class="describe">全球最专业的CRM</span>
+            </div>
+        </div>
+        <div class="right">
+            <div class="rightCell">
+                <div class="login">
+                    <ul>
+                        <li><sapn class="loginTiTle">用户登陆</sapn><span>user login</span></li>
+                        <li class="inputLi"><div class="userName_logo"></div><input id="userName" class="input" type="text" oninput="getPassword(this)"/></li>
+                        <li class="inputLi"><div class="passWord_logo"></div><input id="passWord" class="input" type="password"/></li>
+                        <br/><br/>
+                        <li><input type="checkbox" class="withoutP" /><span> 3天内记住密码</span></li>
+                        <li><input type="button" class="btnLi" value="登录" onclick="login()"/></li>
+                        <li><input type="button" class="btnLi" value="注册" onclick="goRegister()"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>[鲁ICP备11013701号]Copyright*烟台杰瑞教育有限公司&nbsp&nbsp&nbsp童宇制作&nbsp&nbsp&nbspQQ:1369540619</p>
+        <div class="right">
+            <span>微信扫码关注二维码</span>
+            <img src="img/index_ma.png"alt=""/>
+        </div>
+    </div>
+</div>
+</body>
+
+///
+<body>
+<div class="container" id="container">
+
+    <div class="left">
+
+        <div class="t">
+
+            <div>客户关系管理平台</div>
+
+            <img src="img/photo.jpg" alt="图片加载失败!" width="70%" class="uimg"/>
+
+            <div class="us"></div>
+
+        </div>
+
+    </div>
+
+    <div class="right">
+
+        <div class="top">
+
+            <div class="lie" onclick="getPage(1)">客户管理</div>
+
+            <div class="lie" onclick="getPage(2)">拜访记录</div>
+
+            <div class="lie" onclick="getPage(3)">客户订单</div>
+
+
+
+            <img src="img/quit.png" alt="" onclick="quit()"/>
+
+            <img src="img/password.png" alt="" onclick="changeSate('changePassword')"/>
+
+        </div>
+
+        <div class="toolbar"></div>
+
+        <div class="tableBar">
+
+            <div class="lieTable" id="customer">
+
+                <span onclick="changePage(this)">客户管理 </span>
+
+                <div class="exit" onclick="exit(this)"></div>
+
+            </div>
+
+            <div class="lieTable" id="record" style="display: none">
+
+                <span onclick="changePage(this)">拜访记录</span>
+
+                <div class="exit" onclick="exit(this)"></div>
+
+            </div>
+
+            <div class="lieTable" id="order" style="display: none">
+
+                <span onclick="changePage(this)">客户订单</span>
+
+                <div class="exit" onclick="exit(this)"></div>
+
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <iframe class="page" src="homePage_1.html" frameborder="0"></iframe>
+
+            <!--<img src="img/none-box.png" alt="图片加载失败!"/>-->
+
+        </div>
+
+    </div>
+
+
+
+    <div class="changePassword" id="changePassword" style="display:none;" >
+
+        <div class="top" id="changePasswordTop">
+
+            <div class="close" onclick="changeSate('changePassword')"></div>
+
+        </div>
+
+        <div class="cont">
+
+            <form action="">
+
+                <table width="80%">
+
+                    <tr>
+
+                        <td><span>原密码</span></td>
+
+                        <td><input type="text" id="oPw"/></td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td><span>新密码</span></td>
+
+                        <td><input type="text" id="nPw"/></td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td><span>确认密码</span></td>
+
+                        <td><input type="text" id="qPw"/></td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td><input class="set" type="reset"/></td>
+
+                        <td><input class="set" type="reset" value="确定" onclick="changeThePassWord()"/></td>
+
+                    </tr>
+
+                </table>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+Css如下：
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    html{
+        height: 100%;
+    }
+    body{
+        height: 100%;
+    }
+    .container{
+        width: 100%;
+        height: 100%;
+    }
+    .left{
+        width: 20%;
+        height: 100%;
+        background-color: #202a2d;
+        float: left;
+    }
+    .left .t{
+        margin: 20%;
+    }
+    .left .t div{
+        color: #fda408;
+        text-align: center;
+    }
+    .left .t .uimg{
+        margin: 15%;
+        border: 2px solid white;
+        border-radius:100%;
+    }
+    .left .t .us{
+        color: white;
+    }
+
+    .right{
+        width: 80%;
+        height: 100%;
+        float: right;
+        overflow: hidden;
+    }
+    .right .top{
+        width: 100%;
+        height: 6%;
+        background-color: #334149;
+        float: left;
+        overflow: hidden;
+    }
+    .right .top .lie{
+        height: 100%;
+        width:15%;
+        margin-right:5%;
+        line-height: 350%;
+        text-align: center;
+        cursor: pointer;
+        color: white;
+        float: left;
+    }
+    .right .top .lie:hover{
+        background-color: orange;
+        font-size: 18px;
+        line-height: 50px;
+        transition: all 0.2s ;
+    }
+    .right .top img{
+        width: 2%;
+        margin: 15px;
+        float: right;
+        cursor: pointer;
+    }
+
+    .right .top img:hover{
+        opacity: 0.8;
+    }
+
+    .right .toolbar{
+        width: 100%;
+        height: 6%;
+        background-color: #f5b702;
+        float: left;
+        overflow: hidden;
+    }
+    .right .tableBar{
+        width: 100%;
+        height: 6%;
+        background-color: #3d3d3d;
+        float: left;
+        overflow: hidden;
+        position: relative;
+    }
+    .right .tableBar div{
+        height: 75%;
+        width:8%;
+        margin-left:2%;
+        margin-right:2%;
+        margin-top: 1.3%;
+        line-height: 220%;
+        text-align: center;
+        cursor: pointer;
+        color: white;
+        border: 2px solid black;
+        background-color: rgba(61, 61, 61, 0.8);
+        box-shadow: 10px 10px 10px black;
+        border-radius: 8px;
+        float: left;
+        transition: all 0.15s;
+        position: relative;
+    }
+
+    .right .tableBar .lieTablespan{
+        display: inline-block;
+    }
+
+    .right .tableBar .exit{
+        height: 100%;
+        width: 10%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: red;
+    }
+
+    .right .tableBar div:hover{
+        opacity: 0.5;
+    }
+
+    .right .content{
+        width:100%;
+        height: 82%;
+    }
+    .right .content img{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background-repeat: no-repeat;
+    }
+
+    .container:after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .content .page{
+        width: 100%;
+        height: 100%;
+    }
+
+    #customer{
+        background-color: #b3b3b3;
+    }
+    .changePassword{
+        width: 400px;
+        height: 450px;
+        font-weight: bolder;
+        position: absolute;
+        border-radius: 10px;
+        left: 36%;
+        top: 110px;
+        border: 2px solid black;
+        overflow: hidden;
+    }
+
+    .changePassword .top{
+        width: 100%;
+        height: 8%;
+        background-color: #464646;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .changePassword .top .close{
+        height: 60%;
+        width: 5%;
+        background: url("img/cha.png");
+        background-size: cover;
+        position: absolute;
+        right: 2%;
+        top: 20%;
+        cursor: pointer;
+    }
+
+    .changePassword .cont{
+        width: 100%;
+        height: 92%;
+        border-radius: 8px;
+        background:url("img/adBg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.95;
+        overflow: hidden;
+    }
+
+    .changePassword .conttable{
+        margin: 80px auto;
+        text-align: center;
+    }
+
+    .changePassword .conttable tr{
+        height: 35px;
+        line-height: 50px;
+    }
+
+    .changePassword .conttable input{
+        width: 150px;
+        height: 28px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .changePassword .conttable .set{
+        width: 76%;
+        height:40px;
+        background-color: #1a1402;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        font-weight: bolder;
+        letter-spacing: 5px;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+
+    注册界面如下：
+  <div class="container">
+
+                            <h1>请填写以下信息!</h1>
+
+                                          <table class="register">
+
+                                                                 <tr>
+
+                                                                 <td>用户名:</td>
+
+                                                                           <td><input type="text" id="userName" class="input" /></td>
+
+                                                                                                                                  </tr>
+
+
+
+                                                                                                                                    <tr>
+
+                                                                                                                                    <td>密码:</td>
+
+                                                                                                                                             <td><input type="password" id="passWord" class="input" /></td>
+
+                                                                                                                                                                                                        </tr>
+
+                                                                                                                                                                                                          <tr>
+
+                                                                                                                                                                                                          <td>确认密码:</td>
+
+                                                                                                                                                                                                                     <td><input type="password" id="passWord2" class="input" /></td>
+
+                                                                                                                                                                                                                                                                                 </tr>
+
+                                                                                                                                                                                                                                                                                   </table>
+
+                                                                                                                                                                                                                                                                                     <input type="button" class="btnLi" value="注册" onclick="register()"/>
+
+                                                                                                                                                                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                                                                                                                                                                          Css如下：
+ <style>
+
+                                                                                                                                                                                                                                                                                                                                                          *{
+
+                                                                                                                                                                                                                                                                                                                                                              margin: 0;
+
+                                                                                                                                                                                                                                                                                                                                                              padding: 0;
+
+                                                                                                                                                                                                                                                                                                                                                          }
+
+    .container {
+
+        width: 100%;
+
+        height: 80%;
+
+        background: orange;
+
+        text-align: center;
+
+        position: absolute;
+
+    }
+
+
+
+    .btnLi{
+
+        width: 240px;
+
+        line-height: 45px;
+
+        background-color: #1a1402;
+
+        border-radius: 5px;
+
+        color: #efaf06;
+
+        font-size: 20px;
+
+        font-weight: bolder;
+
+        letter-spacing: 10px;
+
+        text-align: center;
+
+        margin: 50px;
+
+    }
+
+
+
+    .container h1{
+
+        color: white;
+
+        font-family: 楷体;
+
+        margin: 50px auto;
+
+    }
+
+
+
+    .container table tr{
+
+        line-height: 50px;
+
+    }
+
+
+
+    .input{
+
+        width:150px;
+
+        height:25px;
+
+        border-radius: 5px;
+
+    }
+
+
+
+    .register {
+
+        margin:0 auto;
+
+    }
+
+</style>
+
+五、添加各种js来实现网页的数据交互
+①、登陆界面的主要js方法：
+我们更具一定的条件，需要初始化数据，然后实现界面的跳转以及登陆的简单判断
+var userArray=[];
+
+
+
+window.onload=function(){
+
+initUser();
+
+
+
+//从本地取得用户的用户名和密码，并转换成对象数组
+
+var userArrayStr=localStorage.userInfo||"";
+
+userArray=eval("("+userArrayStr+")");
+
+};
+
+
+
+function initUser(){
+
+if(!localStorage.userInfo) {
+
+var uArray = [{
+
+userName: "zhangsan",
+
+passWord: "123"
+
+}];
+
+var str = JSON.stringify(uArray);
+
+localStorage.userInfo = str;
+
+}
+
+if(!localStorage.customerInfo) {
+
+var customerArray=[{
+
+cNo:"1",
+
+cName:"张三",
+
+cCity:"山东烟台",
+
+cAddr:"创业科技大厦",
+
+cManager:"李四",
+
+cPost:"212121",
+
+cPhone:"15155152632",
+
+cStars:"3"
+
+},{
+
+cNo:"2",
+
+cName:"asd",
+
+cCity:"ads",
+
+cAddr:"666",
+
+cManager:"66",
+
+cPost:"567",
+
+cPhone:"asd",
+
+cStars:"1"
+
+}];
+
+
+
+
+
+//增加大数据
+
+for(var i=3;i<50;i++){
+
+var obj={
+
+cNo:i,
+
+cName:"张三",
+
+cCity:"山东烟台",
+
+cAddr:"创业科技大厦",
+
+cManager:"李四",
+
+cPost:"212121",
+
+cPhone:"15155152632",
+
+cStars:"3"
+
+};
+
+customerArray.push(obj);
+
+}
+
+
+
+var str=JSON.stringify(customerArray);
+
+localStorage.customerInfo=str;
+
+}
+
+//            localStorage.clear();
+
+}
+
+
+
+function getPassword(cell){
+
+for(var i=0;i<userArray.length;i++){
+
+if((cell.value==userArray[i].userName)&&userArray[i].withoutP){
+
+if(new Date().getTime()<userArray[i].withoutP){
+
+document.getElementById("passWord").value=userArray[i].passWord;
+
+break;
+
+}
+
+}else{
+
+document.getElementById("passWord").value="";
+
+}
+
+}
+
+}
+
+
+
+function login(){
+
+var userName=document.getElementById("userName").value;
+
+var passWord=document.getElementById("passWord").value;
+
+var withoutP=document.getElementsByClassName("withoutP")[0];
+
+
+
+var isLogin=false;
+
+
+
+
+
+for(var i=0;i<userArray.length;i++){
+
+if((userName==userArray[i].userName)&&(passWord==userArray[i].passWord)){
+
+isLogin=true;
+
+sessionStorage.userName=userName;
+
+location.assign("homePage.html");
+
+if(withoutP.checked){
+
+userArray[i].withoutP=new Date().getTime()+259200000;
+
+var str=JSON.stringify(userArray);
+
+localStorage.userInfo=str;
+
+}
+
+}
+
+}
+
+if(!isLogin){
+
+alert("用户名或密码错误！");
+
+}
+
+}
+
+function goRegister(){
+
+location.assign("register.html");
+
+}
+②、主页的主要方法：
+这里的弹窗是用div模拟出来的，通过控制div的display来是实现弹窗的显示和消失、同时也可以拖拽，增加监听事件，同时增加分页效果，来实现大量数据显示时的人性化
+<script>
+
+    var myX=0;
+
+    var myY=0;
+
+    var go=false;
+
+    var changePassword;
+
+    var offsetx=0;
+
+    var offsety=0;
+
+
+
+    document.onmousemove=function(e){
+
+        var cont=document.getElementById("container");
+
+
+
+        myX= e.clientX;
+
+        myY= e.clientY;
+
+        if(go){
+
+            changePassword.style.left=myX-offsetx+"px";
+
+            changePassword.style.top=myY-offsety+"px";
+
+
+
+            //限定位置
+
+            if(parseFloat(changePassword.style.left)<0)changePassword.style.left=0+"px";
+
+            if(parseFloat(changePassword.style.top)<0)changePassword.style.top=0+"px";
+
+            if(parseFloat(parseFloat(changePassword.style.left)+changePassword.offsetWidth)>cont.offsetWidth){
+
+                changePassword.style.left=cont.offsetWidth-changePassword.offsetWidth+"px";
+
+            }
+
+            if(parseFloat(parseFloat(changePassword.style.top)+changePassword.offsetHeight)>cont.offsetHeight-30){
+
+                changePassword.style.top=cont.offsetHeight-changePassword.offsetHeight-30+"px";
+
+            }
+
+        }
+
+    };
+
+
+
+    document.onmouseup=function(){
+
+        go=false;
+
+    };
+
+
+
+    window.onload=function(){
+
+        initUserInfo();
+
+
+
+        changePassword=document.getElementById("changePassword");
+
+        var changePasswordTop=document.getElementById("changePasswordTop");
+
+
+
+        //鼠标按下
+
+        changePassword.onmousedown=function(e){
+
+            if(e.target==changePasswordTop){
+
+                go=true;
+
+                offsetx= e.offsetX;
+
+                offsety= e.offsetY;
+
+            }
+
+        };
+
+
+
+        //失去焦点
+
+        changePassword.onblur=function(){
+
+            go=false;
+
+        };
+
+
+
+
+
+        if(!sessionStorage.userName){
+
+            location.assign("login.html");
+
+        }
+
+    };
+
+
+
+    function initUserInfo(){
+
+        var user=document.getElementsByClassName("us")[0];
+
+        str="用户：";
+
+        str+=sessionStorage.userName||"";
+
+        user.innerHTML=str;
+
+    }
+
+
+
+    function getPage(index){
+
+        var page=document.getElementsByClassName("page")[0];
+
+        var lieTables=document.getElementsByClassName("lieTable");
+
+
+
+        clear();
+
+        lieTables[0].src="homePage_1.html";
+
+        lieTables[1].src="homePage_2.html";
+
+        lieTables[2].src="homePage_3.html";
+
+
+
+        var src;
+
+        switch (index){
+
+            case 1:
+
+                src="homePage_1.html";
+
+
+
+                lieTables[0].style.display="block";
+
+                lieTables[0].style.backgroundColor="#b3b3b3";
+
+                break;
+
+            case 2:
+
+                src="homePage_2.html";
+
+                lieTables[1].style.display="block";
+
+                lieTables[1].style.backgroundColor="#b3b3b3";
+
+                break;
+
+            case 3:
+
+                src="homePage_3.html";
+
+                lieTables[2].style.display="block";
+
+                lieTables[2].style.backgroundColor="#b3b3b3";
+
+                break;
+
+        }
+
+        page.src=src;
+
+    }
+
+
+
+    //清除tableBar的颜色
+
+    function clear(){
+
+        var lieTables=document.getElementsByClassName("lieTable");
+
+
+
+        for(var i=0;i<lieTables.length;i++){
+
+            lieTables[i].style.backgroundColor="rgba(61, 61, 61, 0.8)";
+
+        }
+
+    }
+
+
+
+    function exit(cell){
+
+        var page=document.getElementsByClassName("page")[0];
+
+        if(cell.parentNode.previousElementSibling){
+
+            clear();
+
+
+
+            cell.parentNode.previousElementSibling.style.backgroundColor="#b3b3b3";
+
+            page.src=cell.parentNode.previousElementSibling.src;
+
+            cell.parentNode.style.display="none";
+
+        }
+
+    }
+
+
+
+    function changePage(cell){
+
+        getPage();
+
+        var page=document.getElementsByClassName("page")[0];
+
+
+
+        clear();
+
+
+
+        cell.parentNode.style.backgroundColor="#b3b3b3";
+
+        page.src=cell.parentNode.src;
+
+    }
+
+
+
+    function quit(){
+
+        sessionStorage.clear();
+
+        location.assign("login.html");
+
+    }
+
+
+
+    //控制弹窗的状态
+
+    function changeSate(id){
+
+        var cell=document.getElementById(id);
+
+        if(cell.style.display=="none"){
+
+            cell.style.display="block";
+
+        }else{
+
+            cell.style.display="none";
+
+        }
+
+    }
+
+
+
+    function changeThePassWord(){
+
+        var userName=sessionStorage.userName;
+
+        var oPw=document.getElementById("oPw").value;
+
+        var nPw=document.getElementById("nPw").value;
+
+        var qPw=document.getElementById("qPw").value;
+
+
+
+        var userArrayStr=localStorage.userInfo||"";
+
+        userArray=eval("("+userArrayStr+")");
+
+
+
+        var j=0;
+
+        for(var j=0;j<userArray.length;j++){
+
+            if((userName==userArray[j].userName)&&(oPw==userArray[j].passWord)&&(qPw==nPw)){
+
+                userArray[j].passWord=nPw;
+
+                var str=JSON.stringify(userArray);
+
+                localStorage.userInfo=str;
+
+                changeSate("changePassword");
+
+                break;
+
+            }
+
+        }
+
+        if(j>=userArray.length){
+
+            alert("信息错误!");
+
+        }
+
+    }
+
+
+
+</script>
+
+
+、table页的展示
+<script>
+    var onePageNumber=20;
+
+    //页数
+    var index=0;
+
+    //总页数
+    var pageNumber=1;
+
+
+    //控制弹窗的状态
+    function changeState(id){
+        var cell=document.getElementById(id);
+        if(cell.style.display=="none"){
+            cell.style.display="block";
+        }else{
+            cell.style.display="none";
+        }
+    }
+
+    //用户数据信息（二维数组）
+    var loadCustomerInfoArray=[];
+    //初始化客户信息
+    function initCustomerInfo() {
+        var str = localStorage.customerInfo;
+        var customerInfoArray= eval("(" + str + ")");
+
+        ifPage(customerInfoArray);
+    }
+
+    //判断是否分页
+    function ifPage(customerInfoArray,clear){
+        if(clear){
+            index=0;
+        }
+
+        loadCustomerInfoArray=[];
+        pageNumber=parseInt(customerInfoArray.length/20)+1;
+
+        if(customerInfoArray.length>onePageNumber){
+            for(var i=0;i<pageNumber;i++){
+                loadCustomerInfoArray[i]=[];
+                for(var j=0;j<20;j++){
+                    if(customerInfoArray[j+i*20]){
+                        loadCustomerInfoArray[i][j]=customerInfoArray[j+i*20];
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            pageControl(index);
+        }else{
+            load(customerInfoArray);
+        }
+
+        document.getElementsByClassName("pageNumber")[0].innerHTML="第"+(index+1)+"/"+pageNumber+"页";
+    }
+
+    function load(customerInfoArray){
+
+        var table= document.getElementById("table");
+        var tbody= table.firstElementChild;
+
+        var trs = tbody.children;
+
+        while (trs.length> 1) {
+            var trl = tbody.lastElementChild;
+            tbody.removeChild(trl);
+        }
+        //导入数据
+        for(var i=0;i<customerInfoArray.length;i++){
+            var tr=document.createElement("tr");
+            var td=document.createElement("td");
+            td.innerHTML=i+1;
+            td.width="40px";
+            td.style.backgroundColor="#454545";
+            td.style.color="white";
+            tr.appendChild(td);
+
+            if(customerInfoArray[i]){
+                var td0=document.createElement("td");
+                td0.innerHTML="<inputclass='cCheckbox' type='checkbox'/>";
+                tr.appendChild(td0);
+
+                var td1=document.createElement("td");
+                td1.innerHTML=customerInfoArray[i].cNo;
+                tr.appendChild(td1);
+
+                var td2=document.createElement("td");
+                td2.innerHTML=customerInfoArray[i].cName;
+                tr.appendChild(td2);
+
+                var td3=document.createElement("td");
+                td3.innerHTML=customerInfoArray[i].cCity;
+                tr.appendChild(td3);
+
+                var td4=document.createElement("td");
+                td4.innerHTML=customerInfoArray[i].cAddr;
+                tr.appendChild(td4);
+
+                var td5=document.createElement("td");
+                td5.innerHTML=customerInfoArray[i].cManager;
+                tr.appendChild(td5);
+
+                var td6=document.createElement("td");
+                td6.innerHTML=customerInfoArray[i].cPost;
+                tr.appendChild(td6);
+
+                var td7=document.createElement("td");
+                td7.innerHTML=customerInfoArray[i].cPhone;
+                tr.appendChild(td7);
+
+                var td8=document.createElement("td");
+                var num=customerInfoArray[i].cStars-0;
+                var stars="";
+                for(var j=0;j<num;j++){
+                    stars+="<span  style='color: #f5b704'>★</span>";
+                }
+                for(var j=0;j<(5-num);j++){
+                    stars+="<spanstyle='color: #686868'>★</span>";
+                }
+                td8.innerHTML=stars;
+                tr.appendChild(td8);
+
+                tbody.appendChild(tr);
+            }
+        }
+    }
+
+    //添加用户
+    function addCustomer(){
+        var customerInfo=localStorage.customerInfo;
+        var customerArray=eval("("+customerInfo+")");
+
+        var cName=document.getElementById("cName").value;
+        var cCity=document.getElementById("cCity").value;
+        var cAddr=document.getElementById("cAddr").value;
+        var cManager=document.getElementById("cManager").value;
+        var cPost=document.getElementById("cPost").value;
+        var cPhone=document.getElementById("cPhone").value;
+        var cStars=document.getElementById("cStars").value;
+
+        var cNo=parseInt(customerArray[0].cNo)+1+"";
+        for(var i=0;i<customerArray.length;i++){
+            if(customerArray[i].cNo>=cNo){
+                cNo=parseInt(customerArray[i].cNo)+1+"";
+            }
+        }
+
+        var Customer={
+            cNo:cNo,
+            cName:cName,
+            cCity:cCity,
+            cAddr:cAddr,
+            cManager:cManager,
+            cPost:cPost,
+            cPhone:cPhone,
+            cStars:cStars
+        };
+        customerArray.push(Customer);
+        var str=JSON.stringify(customerArray);
+        localStorage.customerInfo=str;
+
+        //关闭弹窗
+        changeState("addUser");
+
+        index=pageNumber-1;
+
+        //刷新当前页
+        initCustomerInfo();
+
+        alert("添加成功");
+    }
+
+    function del(){
+        var table=document.getElementById("table");
+        var tbody=table.firstElementChild;
+        var trs=tbody.children;
+
+        var customerInfo=localStorage.customerInfo;
+        var customerInfoArray=eval("("+customerInfo+")");
+
+        for(var i=0;i<trs.length;i++){
+            if(trs[i].firstElementChild.nextElementSibling.firstElementChild.checked){
+                for(var j=0;j<customerInfoArray.length;j++) {
+                    if (customerInfoArray[j].cNo == trs[i].firstElementChild.nextElementSibling.nextElementSibling.innerHTML) {
+                        customerInfoArray.splice(j,1);
+                    }
+                }
+            }
+        }
+
+        customerInfo=JSON.stringify(customerInfoArray);
+        localStorage.customerInfo=customerInfo;
+
+        document.getElementById("cCheckbox").checked=false;
+
+        initCustomerInfo();
+        alert("删除成功");
+    }
+
+    function selectAll(){
+        var cCheckbox=document.getElementById("cCheckbox");
+        var table=document.getElementById("table");
+        var tbody=table.firstElementChild;
+        var trs=tbody.children;
+
+        if(cCheckbox.checked){
+            for(var i=0;i<trs.length;i++){
+                trs[i].firstElementChild.nextElementSibling.firstElementChild.checked=true;
+            }
+        }else{
+            for(var i=0;i<trs.length;i++){
+                trs[i].firstElementChild.nextElementSibling.firstElementChild.checked=false;
+            }
+        }
+    }
+
+    //查询
+    function search(){
+
+        var sNo=document.getElementById("sNo").value;
+        var sName=document.getElementById("sName").value;
+        var select=document.getElementById("select").value;
+
+        var customerInfo=localStorage.customerInfo;
+        var customerInfoArray=eval("("+customerInfo+")");
+        var temCustomerInfoArray=[];
+
+        for(var i=0;i<customerInfoArray.length;i++){
+            if(sNo){
+                if(sName){
+                    if((customerInfoArray[i].cNo==sNo)&&(customerInfoArray[i].cName.split(sName).length>1)){
+                        temCustomerInfoArray.push(customerInfoArray[i]);
+                    }
+                }else{
+                    if(customerInfoArray[i].cNo==sNo){
+                        temCustomerInfoArray.push(customerInfoArray[i]);
+                    }
+                }
+            }else if(sName){
+                if (customerInfoArray[i].cName.split(sName).length>1){
+                    temCustomerInfoArray.push(customerInfoArray[i]);
+                }
+            }else{
+                temCustomerInfoArray=customerInfoArray;
+            }
+        }
+
+        if(select!=0){
+            var mNewArray=temCustomerInfoArray;
+            for(var i=0;i<mNewArray.length;i++){
+                if(mNewArray[i]){
+                    if(mNewArray[i].cStars!=select){
+                        mNewArray[i]="";
+                    }
+                }
+            }
+            temCustomerInfoArray=[];
+
+            for(var i=0,j=0;i<mNewArray.length;i++){
+                if(mNewArray[i]!=""){
+                    temCustomerInfoArray[j++]=mNewArray[i];
+                }
+            }
+        }
+
+        ifPage(temCustomerInfoArray,true);
+    }
+
+
+    //页数管理
+    function pageControl(index){
+        load(loadCustomerInfoArray[index]);
+    }
+
+    //翻页
+    function flip(id){
+        switch (id){
+            case 0:
+                if(index>=1){
+                    index--;
+                    load(loadCustomerInfoArray[index]);
+                }
+                break;
+            case 1:
+                if(index<pageNumber-1){
+                    index++;
+                    load(loadCustomerInfoArray[index]);
+                }
+                break;
+        }
+
+        document.getElementsByClassName("pageNumber")[0].innerHTML="第"+(index+1)+"/"+pageNumber+"页";
+    }
+
+
+
+    var myX=0;
+    var myY=0;
+    var go=false;
+    var addUser;
+    var offsetx=0;
+    var offsety=0;
+
+    document.onmousemove=function(e){
+        var cont=document.getElementById("cont");
+
+        myX= e.clientX;
+        myY= e.clientY;
+        if(go){
+            addUser.style.left=myX-offsetx+"px";
+            addUser.style.top=myY-offsety+"px";
+
+            //限定位置
+            if(parseFloat(addUser.style.left)<0)addUser.style.left=0+"px";
+            if(parseFloat(addUser.style.top)<0)addUser.style.top=0+"px";
+            if(parseFloat(parseFloat(addUser.style.left)+addUser.offsetWidth)>cont.offsetWidth){
+                addUser.style.left=cont.offsetWidth-addUser.offsetWidth+"px";
+            }
+            if(parseFloat(parseFloat(addUser.style.top)+addUser.offsetHeight)>cont.offsetHeight-30){
+                addUser.style.top=cont.offsetHeight-addUser.offsetHeight-30+"px";
+            }
+        }
+    };
+
+    document.onmouseup=function(){
+        go=false;
+    };
+
+
+    window.onload=function(){
+        addUser=document.getElementById("addUser");
+        var addUserTop=document.getElementById("addUserTop");
+
+        initCustomerInfo();
+
+        //鼠标按下
+        addUser.onmousedown=function(e){
+            if(e.target==addUserTop){
+                go=true;
+                offsetx= e.offsetX;
+                offsety= e.offsetY;
+            }
+        };
+        //失去焦点
+        addUser.onblur=function(){
+            go=false;
+        };
+    };
+</script>
+</body>
+</html>
